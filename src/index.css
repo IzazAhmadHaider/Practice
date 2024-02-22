@@ -14,6 +14,3 @@
   appearance: none;
   /* margin-top: 8px; */
 }
-.range-slider::-webkit-slider-thumb::before{
-  content: "izaz";
-}
