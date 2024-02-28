@@ -1,4 +1,6 @@
+import UpdateObject from "./components/ObjectUpdataion"
 import RangeSlider from "./components/RangeSlider"
+import RangeSlider1 from "./components/RangeSlider1"
 
 
 function App() {
@@ -6,7 +8,14 @@ function App() {
 
   return (
     <>
-    <RangeSlider/>
+    
+    {/* <RangeSlider1/>
+    <RangeSlider/> */}
+
+    <UpdateObject/>
+
+    
+    
     </>
   )
 }
