@@ -16,7 +16,7 @@ function Home() {
       <Link to="/apireq" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Apireq
       </Link>
-      <Link to="/checksvg" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <Link to="/checksvg" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
         Checksvg
       </Link>
     </div>
