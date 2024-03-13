@@ -1,23 +1,27 @@
-import UpdateObject from "./components/ObjectUpdataion"
-import RangeSlider from "./components/RangeSlider"
-import RangeSlider1 from "./components/RangeSlider1"
+import * as React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// Import your components
+import RangeSlider from './components/RangeSlider';
+import RangeSlider1 from './components/RangeSlider1';
+import UpdateObject from './components/ObjectUpdataion';
+import Apireq from './components/Apireq';
+import Cheksvg from './components/Checksvg';
+import Home from './components/Home';
 
-function App() {
-
-
+const App = () => {
   return (
-    <>
-    
-    {/* <RangeSlider1/>
-    <RangeSlider/> */}
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/rangeslider1" element={<RangeSlider1 />} />
+        <Route path="/range-slider" element={<RangeSlider />} />
+        <Route path="/update-object" element={<UpdateObject />} />
+        <Route path="/apireq" element={<Apireq />} />
+        <Route path="/checksvg" element={<Cheksvg />} />
+      </Routes>
+    </Router>
+  );
+};
 
-    <UpdateObject/>
-
-    
-    
-    </>
-  )
-}
-
-export default App
+export default App;
