@@ -8,6 +8,8 @@ import UpdateObject from './components/ObjectUpdataion';
 import Apireq from './components/Apireq';
 import Cheksvg from './components/Checksvg';
 import Home from './components/Home';
+import CategoryMenu from './components/catagorieshover';
+import MapComponent from './components/Map';
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path="/update-object" element={<UpdateObject />} />
         <Route path="/apireq" element={<Apireq />} />
         <Route path="/checksvg" element={<Cheksvg />} />
+        <Route path="/catagories" element={<CategoryMenu />} />
+        <Route path="/map" element={<MapComponent />} />
       </Routes>
     </Router>
   );
