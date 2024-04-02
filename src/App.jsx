@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Import your components
 import RangeSlider from './components/RangeSlider';
 import RangeSlider1 from './components/RangeSlider1';
 import UpdateObject from './components/ObjectUpdataion';
@@ -9,7 +8,8 @@ import Apireq from './components/Apireq';
 import Cheksvg from './components/Checksvg';
 import Home from './components/Home';
 import CategoryMenu from './components/catagorieshover';
-import MapComponent from './components/Map';
+import MapComponent from './components/Mapedit';
+import MapComponent2 from './components/Mapshow';
 
 const App = () => {
   return (
@@ -23,6 +23,7 @@ const App = () => {
         <Route path="/checksvg" element={<Cheksvg />} />
         <Route path="/catagories" element={<CategoryMenu />} />
         <Route path="/map" element={<MapComponent />} />
+        <Route path="/map2" element={<MapComponent2 />} />
       </Routes>
     </Router>
   );

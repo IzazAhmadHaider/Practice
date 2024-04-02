@@ -22,6 +22,12 @@ function Home() {
       <Link to="/catagories" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
         Catagories
       </Link>
+      <Link to="/map" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+        MapCreating
+      </Link>
+      <Link to="/map2" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+        MapShowing
+      </Link>
     </div>
   );
 }
