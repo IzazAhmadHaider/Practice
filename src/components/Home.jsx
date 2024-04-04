@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="flex justify-between">
+    <div className="grid grid-cols-4 gap-3 mt-4">
       <Link to="/range-slider" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         RangeSlider1
       </Link>
@@ -27,6 +27,9 @@ function Home() {
       </Link>
       <Link to="/map2" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
         MapShowing
+      </Link>
+      <Link to="/shp2gj" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+        Shapefile 2 geojson
       </Link>
     </div>
   );
