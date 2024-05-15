@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.range-slider::-webkit-slider-thumb {
+  /* position: absolute; */
+  width: 35px; 
+  height: 25px; 
+  background-color: #903FFF; 
+  border-radius: 40%; 
+  border: none; 
+  -webkit-appearance: none; 
+  appearance: none;
+  /* margin-top: 8px; */
+}
