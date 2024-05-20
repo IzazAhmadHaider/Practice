@@ -10,7 +10,7 @@ import Home from './components/Home';
 import CategoryMenu from './components/catagorieshover';
 // import MapComponent from './components/Mapedit';
 // import MapComponent2 from './components/Mapshow';
-import Shapefiletogeojson from './components/Shp2geojson';
+import Curve from './components/Curve';
 
 const App = () => {
   return (
@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/catagories" element={<CategoryMenu />} />
         {/* <Route path="/map" element={<MapComponent />} /> */}
         {/* <Route path="/map2" element={<MapComponent2 />} /> */}
-        <Route path="/shp2gj" element={<Shapefiletogeojson />} />
+        <Route path="/curve" element={<Curve />} />
       </Routes>
     </Router>
   );
