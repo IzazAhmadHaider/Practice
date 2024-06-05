@@ -8,10 +8,9 @@ import Apireq from './components/Apireq';
 import Cheksvg from './components/Checksvg';
 import Home from './components/Home';
 import CategoryMenu from './components/catagorieshover';
-// import MapComponent from './components/Mapedit';
-// import MapComponent2 from './components/Mapshow';
 import Curve from './components/Curve';
 import Dropdown from './components/Dropdown';
+import Complexobj from './components/ComplexObj';
 
 const App = () => {
   return (
@@ -28,6 +27,7 @@ const App = () => {
         {/* <Route path="/map2" element={<MapComponent2 />} /> */}
         <Route path="/curve" element={<Curve />} />
         <Route path="/dropdown" element={<Dropdown />} />
+        <Route path="/cobj" element={<Complexobj />} />
       </Routes>
     </Router>
   );
