@@ -34,6 +34,9 @@ function Home() {
       <Link to="/dropdown" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
         dropdown
       </Link>
+      <Link to="/cobj" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+        objects
+      </Link>
     </div>
   );
 }
