@@ -1,44 +1,28 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, toggleTodo, deleteTodo } from './redux/todoslice';
-import "../src/App.css"
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './redux/slices/counterslice.js'
 
-const App = () => {
-  const [input, setInput] = useState('');
-  const dispatch = useDispatch();
-  const todos = useSelector(state => state.todos);
-
-  const handleAddTodo = () => {
-    if (input.trim()) {
-      dispatch(addTodo(input));
-      setInput('');
-    }
-  };
+export default function App() {
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
 
   return (
     <div>
-      <h1>Todo List</h1>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={handleAddTodo}>Add Todo</button>
-      <ul> 
-        {todos.map(todo => (
-          <li key={todo.id}>
-            <span
-              onClick={() => dispatch(toggleTodo(todo.id))}
-              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-            >
-              {todo.text}
-            </span>
-            <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+        <span>{count}</span>
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+      </div>
     </div>
-  );
-};
-
-export default App;
+  )
+}
