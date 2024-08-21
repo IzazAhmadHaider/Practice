@@ -34,14 +34,33 @@ app.get("/getUsers", (req, res) => {
 });
 app.post("/CreateUsers", async (req, res) => {
     try {
-      const user = req.body;
-      const newUser = new userModel(user);
+      const { name, mobileno } = req.body;
+  
+      // Check if user already exists by name
+      const userByName = await userModel.findOne({ name });
+      if (userByName) {
+        return res.status(400).json({ message: "User already exists with this name", field: "name" });
+      }
+  
+      // Check if user already exists by mobile number
+      const userByMobile = await userModel.findOne({ mobileno });
+      if (userByMobile) {
+        return res.status(400).json({ message: "User already exists with this mobile number", field: "mobileno" });
+      }
+  
+      // Create and save the new user if no duplicates are found
+      const newUser = new userModel(req.body);
       await newUser.save();
-      res.json({ message: "User created successfully", userId: newUser });
+      res.status(201).json({ message: "User created successfully", userId: newUser._id });
     } catch (err) {
+      // Handle duplicate key error
+      if (err.code === 11000) {
+        return res.status(400).json({ message: "Duplicate key error", error: err });
+      }
       res.status(500).json({ message: "Error creating user", error: err });
     }
   });
+  
   
 
 app.delete("/deleteUser/:id", async (req, res) => {

@@ -1,15 +1,18 @@
 const mongoose = require("mongoose");
+
 const userSchema = new mongoose.Schema({
   name: {
-    type: "string",
+    type: String,  // Use String instead of "string"
     required: true,
     unique: true
   },
   mobileno: {
-    type: "string",
+    type: String,  // Use String instead of "string"
     required: true,
     unique: true
   },
 });
-const userModel =mongoose.model("users",userSchema);
+
+const userModel = mongoose.model("User", userSchema); // Changed collection name to "User"
+
 module.exports = userModel;
