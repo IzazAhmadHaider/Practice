@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -36,6 +36,9 @@ function Home() {
       </Link>
       <Link to="/cobj" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
         objects
+      </Link>
+      <Link to="/luthfullah" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+        Luthfullah
       </Link>
     </div>
   );

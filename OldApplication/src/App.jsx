@@ -1,4 +1,4 @@
-import * as React from 'react';
+// import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import RangeSlider from './components/RangeSlider';
@@ -11,9 +11,11 @@ import CategoryMenu from './components/catagorieshover';
 import Curve from './components/Curve';
 import Dropdown from './components/Dropdown';
 import Complexobj from './components/ComplexObj';
+import Luthfullah from './components/Luthfullah';
 
 const App = () => {
   return (
+    <>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -28,8 +30,10 @@ const App = () => {
         <Route path="/curve" element={<Curve />} />
         <Route path="/dropdown" element={<Dropdown />} />
         <Route path="/cobj" element={<Complexobj />} />
+        <Route path="/luthfullah" element={<Luthfullah />} />
       </Routes>
     </Router>
+    </>
   );
 };
 
