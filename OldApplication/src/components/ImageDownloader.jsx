@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useRef, useState, useEffect } from "react";
 import { toPng } from "html-to-image";
@@ -19,11 +20,13 @@ const DownloadImage = () => {
         fours: "",
         strikeRate: 0,
     });
-    const bowlerData = {
-        overs: 4.2,  // 4 overs and 2 balls
-        wickets: 3,
-        runs: 30,
-    };
+    const [bowlerData, setBowlerData] = useState({
+        overs: "",
+        wickets: "",
+        runs: "",
+        econ: "",
+    });
+
     const [colors, setColors] = useState({
         textColor: "#ffffff",
         backgroundColor: "#96bcda",
@@ -98,7 +101,7 @@ const DownloadImage = () => {
     const renderComponent = () => {
         if (selectedAward.includes('Batsman')) return <Batsmancomponent colors={colors} playerData={playerData} />;
         if (selectedAward.includes('Bowler')) return <BowlerComponent colors={colors} bowlerData={bowlerData} />;
-        // if (selectedAward.includes('AllRounder')) return <Allrounder />;
+        if (selectedAward.includes('Allrounder')) return <AllrounderComponent colors={colors} AllrounderData={bowlerData} playerData={playerData} />;
         return null;
     };
 
@@ -164,6 +167,34 @@ const DownloadImage = () => {
                     onChange={handleInputChange}
                     className="block w-full mb-2 p-2 border border-gray-300 rounded"
                 />
+                <input
+                    type="number"
+                    name="overs"
+                    placeholder="Overs [For Bowlers]"
+                    value={bowlerData.overs}
+                    onChange={(e) => setBowlerData({ ...bowlerData, overs: e.target.value })}
+                    className="block w-full mb-2 p-2 border border-gray-300 rounded"
+                />
+
+                <input
+                    type="number"
+                    name="wickets"
+                    placeholder="Wickets [For Bowlers]"
+                    value={bowlerData.wickets}
+                    onChange={(e) => setBowlerData({ ...bowlerData, wickets: e.target.value })}
+                    className="block w-full mb-2 p-2 border border-gray-300 rounded"
+                />
+
+                <input
+                    type="number"
+                    name="runs"
+                    placeholder="Runs [For Bowlers]"
+                    value={bowlerData.runs}
+                    onChange={(e) => setBowlerData({ ...bowlerData, runs: e.target.value })}
+                    className="block w-full mb-2 p-2 border border-gray-300 rounded"
+                />
+
+
 
                 {/* Color inputs for text, background, label, and border colors */}
                 <div className="flex flex-col mb-2">
@@ -356,3 +387,89 @@ function BowlerComponent({ colors, bowlerData }) {
         </>
     );
 }
+function AllrounderComponent({ colors, AllrounderData, playerData }) {
+    const calculateStrikeRate = (balls, wickets) => {
+        return wickets > 0 ? (balls / wickets).toFixed(2) : "N/A";
+    };
+
+    // Convert overs to balls (1 over = 6 balls)
+    const totalBalls = Math.floor(AllrounderData.overs) * 6 + (AllrounderData.overs % 1) * 10;
+
+    return (
+        <>
+            <div className=" flex justify-between w-full my-1">
+                <h1
+                    className="text-xs mx-auto w-fit z-10 bg-[#360607] leading-tight tracking-[0.2em] uppercase text-[8px] font-bold px-4 py-1 rounded-xl"
+                    style={{ color: colors.textColor }}
+                >
+                    Bowling Stats
+                </h1>
+                <h1
+                    className="text-xs mx-auto w-fit z-10 bg-[#360607] leading-tight tracking-[0.2em] uppercase text-[8px] font-bold px-4 py-1 rounded-xl"
+                    style={{ color: colors.textColor }}
+                >
+                    Batting Stats
+                </h1>
+            </div>
+            <div className="flex">
+                <div className={`grid grid-cols-2 text-xs font-semibold w-[60%] mx-auto scale-90 mb-2`} style={{ color: colors.textColor }}>
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>Overs:</p>
+                        <p>{AllrounderData.overs}</p>
+                    </div>
+
+                    {/* Wickets */}
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>Wickets:</p>
+                        <p>{AllrounderData.wickets}</p>
+                    </div>
+
+                    {/* Runs Conceded */}
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-r" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>Runs:</p>
+                        <p>{AllrounderData.runs}</p>
+                    </div>
+
+                    {/* Strike Rate */}
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>Econ:</p>
+                        <p>{AllrounderData.runs/AllrounderData.overs}</p>
+                    </div>
+                </div>
+
+                <div className={`grid grid-cols-2 text-xs font-semibold w-[60%] mx-auto scale-90`} style={{ color: colors.textColor }}>
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>Score:</p>
+                        <p>{playerData.score || "0"}</p>
+                    </div>
+
+                    {/* Balls Faced */}
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>Balls Faced:</p>
+                        <p>{playerData.ballsFaced || "0"}</p>
+                    </div>
+
+                    {/* Fours */}
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>4s:</p>
+                        <p>{playerData.fours || "0"}</p>
+                    </div>
+
+                    {/* Sixes */}
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>6s:</p>
+                        <p>{playerData.sixes || "0"}</p>
+                    </div>
+
+                    {/* Strike Rate */}
+                    <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-r" style={{ borderColor: colors.borderColor }}>
+                        <p className="overflow-hidden" style={{ color: colors.labelColor }}>SR:</p>
+                        <p>{playerData.strikeRate || "0"}</p>
+                    </div>
+                </div>
+            </div> 
+
+        </>
+    );
+}
+
