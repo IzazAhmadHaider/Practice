@@ -4,6 +4,7 @@ import download from "downloadjs";
 import triangle from "../assets/imagedownloaderimages/triangle.png";
 import flame from "../assets/imagedownloaderimages/brushed.png";
 import spl2 from "../assets/imagedownloaderimages/spl2.png";
+import './imagdownloader.css'
 
 const DownloadImage = () => {
     const divRef = useRef(null);
@@ -24,6 +25,8 @@ const DownloadImage = () => {
         labelColor: "#ffcc00", // Color for labels
         borderColor: "#360607", // Color for borders
     });
+
+    const [strifs, setStrifs] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -84,9 +87,8 @@ const DownloadImage = () => {
     };
 
     return (
-        <div className="p-4 font-SairaCondensed w-full flex flex-grow space-x-10">
-            {/* Inputs to gather player data */}
-            <div className="mb-4">
+        <div className="p-4 font-SairaCondensed w-full flex max-md:flex-col-reverse  flex-grow space-x-10">
+            <div className="mb-4 grid grid-cols-2 gap-2 max-md:grid-cols-1 max-md:mt-3">
                 <input
                     type="text"
                     name="name"
@@ -139,6 +141,7 @@ const DownloadImage = () => {
 
                 {/* Color inputs for text, background, label, and border colors */}
                 <div className="flex flex-col mb-2">
+                    <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-fit" onClick={() => { setStrifs(!strifs) }}>Strips</button>
                     <label className="mb-1">Text Color:</label>
                     <input
                         type="color"
@@ -186,11 +189,11 @@ const DownloadImage = () => {
                     style={{
                         backgroundColor: colors.backgroundColor,
                     }}
-                    className="p-8 relative text-white w-64 h-72 flex flex-col items-center justify-center rounded-lg shadow-lg"
+                    className={`p-8 relative ${strifs && 'strifs'} text-white w-64 h-72 flex flex-col items-center justify-center rounded-lg shadow-lg`}
                 >
                     <p
                         style={{ color: colors.textColor }}
-                        className="leading-tight tracking-[0.2em] uppercase text-[15px] font-bold absolute top-2 shadow-2xl"
+                        className={`leading-tight tracking-[0.2em] uppercase text-[15px] font-bold absolute top-2 shadow-2xl ${strifs && 'bg-[#360607] rounded-lg p-1.5'}`}
                     >
                         Sheikh Jana Champions
                     </p>
@@ -198,30 +201,30 @@ const DownloadImage = () => {
                         <img
                             src={playerData.image}
                             alt="Player"
-                            className="w-[170px] scale-[0.8] h-48 border rounded-lg absolute top-2 right-1 z-20 mb-4"
+                            className={`w-[170px] scale-[0.8] h-48 border rounded-lg absolute top-2 right-1 z-20 mb-4 ${strifs && 'scale-[0.65]'}`}
                         />
                     )}
                     <img src={flame} className="absolute w-52 scale-[0.8] opacity-70 aspect-square top-0 -right-4 z-10" alt="" />
                     <img src={triangle} className="absolute scale-[0.8] w-40 aspect-square top-10 right-3 rotate-12 z-0" alt="" />
                     <div className="absolute top-10 left-1.5 z-0 flex space-x-1">
                         <img src={spl2} className="w-4 aspect-square" alt="" />
-                        <p className="flex flex-col text-left leading-tight uppercase text-[6px] font-bold" style={{ color: colors.textColor }}>
+                        <p className={`flex flex-col text-left leading-tight uppercase text-[6px] font-bold ${strifs && 'bg-[#360607] rounded-lg p-1.5'}`} style={{ color: colors.textColor }}>
                             <span className="tracking-[0.2em] font-extrabold">Tufail MEMORIAL</span>
                             <span>Sheikh Jana PREMIER LEAGUE</span>
                             <span className="text-[#fc065e] tracking-[0.2em]">2nd edition 2024</span>
                         </p>
                     </div>
 
-                    <div className="absolute bottom-3.5 z-10 w-full">
+                    <div className={`absolute bottom-0 z-10 w-full ${strifs && 'bg-[#360607] rounded-lg'}`}>
                         <h1
                             className="text-base mx-auto w-fit z-10 bg-[#360607] leading-tight tracking-[0.2em] uppercase text-[15px] font-bold px-4 py-1 rounded-xl"
                             style={{ color: colors.textColor }}
                         >
                             {playerData.name || "Player Name"}
                         </h1>
-                        <div className="grid grid-cols-2 text-sm font-bold w-[70%] mx-auto h-14 scale-90" style={{ color: colors.textColor }}>
+                        <div className={`grid grid-cols-2 text-sm font-bold w-[70%] mx-auto  scale-90 `} style={{ color: colors.textColor }}>
                             {/* Score */}
-                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                            <div className="flex p-0.5 justify-between mx-auto w-full  z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
                                 <p className="overflow-hidden" style={{ color: colors.labelColor }}>Score:</p>
                                 <p>{playerData.score || "0"}</p>
                             </div>
