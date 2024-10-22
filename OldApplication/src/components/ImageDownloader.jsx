@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
 import triangle from "../assets/imagedownloaderimages/triangle.png";
@@ -13,50 +13,67 @@ const DownloadImage = () => {
         image: "",
         score: "",
         ballsFaced: "",
+        sixes: "",
+        fours: "",
+        strikeRate: 0,
     });
 
     const [colors, setColors] = useState({
-        textColor: "#ffffff", // Default text color
-        backgroundColor: "#96bcda", // Default background color
+        textColor: "#ffffff",
+        backgroundColor: "#96bcda",
+        labelColor: "#ffcc00", // Color for labels
+        borderColor: "#360607", // Color for borders
     });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setPlayerData({
-            ...playerData,
+        setPlayerData((prevData) => ({
+            ...prevData,
             [name]: value,
-        });
+        }));
     };
 
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0]; // Get the first file uploaded
-        const reader = new FileReader(); // Create a FileReader to read the file
+    useEffect(() => {
+        const { score, ballsFaced } = playerData;
+        if (score && ballsFaced) {
+            const calculatedStrikeRate = ((score / ballsFaced) * 100).toFixed(3);
+            setPlayerData((prevData) => ({
+                ...prevData,
+                strikeRate: Math.min(calculatedStrikeRate, 9999),
+            }));
+        } else {
+            setPlayerData((prevData) => ({
+                ...prevData,
+                strikeRate: 0,
+            }));
+        }
+    }, [playerData.score, playerData.ballsFaced]);
 
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
         reader.onloadend = () => {
             setPlayerData((prevData) => ({
                 ...prevData,
-                image: reader.result, // Set the image data as a Data URL
+                image: reader.result,
             }));
         };
-
         if (file) {
-            reader.readAsDataURL(file); // Read the file as a Data URL
+            reader.readAsDataURL(file);
         }
     };
 
     const handleColorChange = (e) => {
         const { name, value } = e.target;
-        setColors({
-            ...colors,
+        setColors((prevColors) => ({
+            ...prevColors,
             [name]: value,
-        });
+        }));
     };
 
     const handleDownload = () => {
         if (divRef.current) {
-            toPng(divRef.current, {
-                quality: 1.0,
-            })
+            toPng(divRef.current, { quality: 1.0 })
                 .then((dataUrl) => {
                     download(dataUrl, "cricket-card.png");
                 })
@@ -79,7 +96,6 @@ const DownloadImage = () => {
                     className="block w-full mb-2 p-2 border border-gray-300 rounded"
                 />
 
-                {/* File input for uploading the image */}
                 <input
                     type="file"
                     accept="image/*"
@@ -104,7 +120,24 @@ const DownloadImage = () => {
                     className="block w-full mb-2 p-2 border border-gray-300 rounded"
                 />
 
-                {/* Color inputs for text and background colors */}
+                <input
+                    type="number"
+                    name="sixes"
+                    placeholder="6s"
+                    value={playerData.sixes}
+                    onChange={handleInputChange}
+                    className="block w-full mb-2 p-2 border border-gray-300 rounded"
+                />
+                <input
+                    type="number"
+                    name="fours"
+                    placeholder="4s"
+                    value={playerData.fours}
+                    onChange={handleInputChange}
+                    className="block w-full mb-2 p-2 border border-gray-300 rounded"
+                />
+
+                {/* Color inputs for text, background, label, and border colors */}
                 <div className="flex flex-col mb-2">
                     <label className="mb-1">Text Color:</label>
                     <input
@@ -125,7 +158,28 @@ const DownloadImage = () => {
                         className="p-2 border border-gray-300 rounded"
                     />
                 </div>
+                <div className="flex flex-col mb-2">
+                    <label className="mb-1">Label Color:</label>
+                    <input
+                        type="color"
+                        name="labelColor"
+                        value={colors.labelColor}
+                        onChange={handleColorChange}
+                        className="p-2 border border-gray-300 rounded"
+                    />
+                </div>
+                <div className="flex flex-col mb-2">
+                    <label className="mb-1">Border Color:</label>
+                    <input
+                        type="color"
+                        name="borderColor"
+                        value={colors.borderColor}
+                        onChange={handleColorChange}
+                        className="p-2 border border-gray-300 rounded"
+                    />
+                </div>
             </div>
+
             <div>
                 <div
                     ref={divRef}
@@ -144,62 +198,65 @@ const DownloadImage = () => {
                         <img
                             src={playerData.image}
                             alt="Player"
-                            className="w-[170px] scale-[0.8] h-48 border rounded-lg absolute top-2 right-1 z-20 mb-4 "
+                            className="w-[170px] scale-[0.8] h-48 border rounded-lg absolute top-2 right-1 z-20 mb-4"
                         />
                     )}
                     <img src={flame} className="absolute w-52 scale-[0.8] opacity-70 aspect-square top-0 -right-4 z-10" alt="" />
-                    <img src={triangle} className="absolute scale-[0.8] w-40 aspect-square top-10  right-3 rotate-12  z-0" alt="" />
-                    <div className="absolute  top-10  left-1.5  z-0 flex space-x-1">
-                        <img src={spl2} className=" w-4 aspect-square" alt="" />
-                        <p className=" flex flex-col text-left leading-tight uppercase text-[6px] font-bold" style={{ color: colors.textColor }}>
+                    <img src={triangle} className="absolute scale-[0.8] w-40 aspect-square top-10 right-3 rotate-12 z-0" alt="" />
+                    <div className="absolute top-10 left-1.5 z-0 flex space-x-1">
+                        <img src={spl2} className="w-4 aspect-square" alt="" />
+                        <p className="flex flex-col text-left leading-tight uppercase text-[6px] font-bold" style={{ color: colors.textColor }}>
                             <span className="tracking-[0.2em] font-extrabold">Tufail MEMORIAL</span>
                             <span>Sheikh Jana PREMIER LEAGUE</span>
                             <span className="text-[#fc065e] tracking-[0.2em]">2nd edition 2024</span>
                         </p>
                     </div>
 
-                    <div className="absolute bottom-0 z-10 w-full">
+                    <div className="absolute bottom-3.5 z-10 w-full">
                         <h1
                             className="text-base mx-auto w-fit z-10 bg-[#360607] leading-tight tracking-[0.2em] uppercase text-[15px] font-bold px-4 py-1 rounded-xl"
                             style={{ color: colors.textColor }}
                         >
                             {playerData.name || "Player Name"}
                         </h1>
-                        <div className="grid grid-cols-2 text-sm font-bold w-[70%] mx-auto h-14 scale-95" style={{ color: colors.textColor }}>
+                        <div className="grid grid-cols-2 text-sm font-bold w-[70%] mx-auto h-14 scale-90" style={{ color: colors.textColor }}>
                             {/* Score */}
-                            <div className="flex justify-between mx-auto w-full z-10  border-r border-b border-[#360607] px-2">
-                                <p className="overflow-hidden">Score:</p>
+                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>Score:</p>
                                 <p>{playerData.score || "0"}</p>
                             </div>
 
                             {/* Balls Faced */}
-                            <div className="flex justify-between mx-auto w-full z-10  border-b border-[#360607] px-2">
-                                <p className="overflow-hidden">Balls Faced:</p>
+                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>Balls Faced:</p>
                                 <p>{playerData.ballsFaced || "0"}</p>
                             </div>
 
-                            {/* Strike Rate */}
-                            <div className="flex justify-between w-full  border-r  border-[#360607] mx-auto z-10  px-2">
-                                <p className="overflow-hidden">Strike Rate:</p>
-                                <p>{playerData.strikeRate || "0"}</p>
+                            {/* Fours */}
+                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>4s:</p>
+                                <p>{playerData.fours || "0"}</p>
                             </div>
 
-                            {/* Average */}
-                            <div className="flex justify-between w-full mx-auto z-10 px-2 ">
-                                <p className="overflow-hidden">Average:</p>
-                                <p>{playerData.average || "0"}</p>
+                            {/* Sixes */}
+                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>6s:</p>
+                                <p>{playerData.sixes || "0"}</p>
+                            </div>
+
+                            {/* Strike Rate */}
+                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r" style={{ borderColor: colors.borderColor }}>
+                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>SR:</p>
+                                <p>{playerData.strikeRate || "0"}</p>
                             </div>
                         </div>
                     </div>
-
-                    <div className="absolute bottom-0 w-[90%] h-[72px] z-0 border-t-[2px] border-[#360607]"></div>
                 </div>
-                {/* Button to download the card as PNG */}
                 <button
-                    className="mt-4 px-4 py-2 bg-green-500 text-white rounded"
                     onClick={handleDownload}
+                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                 >
-                    Download as PNG
+                    Download Image
                 </button>
             </div>
         </div>
