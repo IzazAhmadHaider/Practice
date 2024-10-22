@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRef, useState, useEffect } from "react";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
@@ -18,7 +19,11 @@ const DownloadImage = () => {
         fours: "",
         strikeRate: 0,
     });
-
+    const bowlerData = {
+        overs: 4.2,  // 4 overs and 2 balls
+        wickets: 3,
+        runs: 30,
+    };
     const [colors, setColors] = useState({
         textColor: "#ffffff",
         backgroundColor: "#96bcda",
@@ -27,6 +32,8 @@ const DownloadImage = () => {
     });
 
     const [strifs, setStrifs] = useState(false);
+    const [selectedAward, setSelectedAward] = useState("");
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -85,10 +92,29 @@ const DownloadImage = () => {
                 });
         }
     };
+    const handleAwardChange = (e) => {
+        setSelectedAward(e.target.value);
+    };
+    const renderComponent = () => {
+        if (selectedAward.includes('Batsman')) return <Batsmancomponent colors={colors} playerData={playerData} />;
+        if (selectedAward.includes('Bowler')) return <BowlerComponent colors={colors} bowlerData={bowlerData} />;
+        // if (selectedAward.includes('AllRounder')) return <Allrounder />;
+        return null;
+    };
+
 
     return (
         <div className="p-4 font-SairaCondensed w-full flex max-md:flex-col-reverse  flex-grow space-x-10">
             <div className="mb-4 grid grid-cols-2 gap-2 max-md:grid-cols-1 max-md:mt-3">
+                <select name="award" value={selectedAward} onChange={handleAwardChange} className="block w-full mb-2 p-2 border border-gray-300 uppercase rounded">
+                    <option value="">Select Award</option>
+                    <option value="Player of the Match (Batsman)">Player of the Match (Batsman)</option>
+                    <option value="Player of the Match (Bowler)">Player of the Match (Bowler)</option>
+                    <option value="Player of the Match (Allrounder)">Player of the Match (AllRounder)</option>
+                    <option value="Best Bowler of the Match">Best Bowler of the Match</option>
+                    <option value="Best Batsman of the Match">Best Batsman of the Match</option>
+                </select>
+
                 <input
                     type="text"
                     name="name"
@@ -197,6 +223,16 @@ const DownloadImage = () => {
                     >
                         Sheikh Jana Champions
                     </p>
+                    {selectedAward && (
+                        <p
+                            className="absolute uppercase text-2xl leading-[22px] font-bold text-white w-[35%]"
+                            style={{ top: "30%", left: "3%", color: colors.labelColor }}
+                        >
+                            {selectedAward.replace(/\s*\(.*?\)\s*/g, "")}
+                        </p>
+                    )}
+
+
                     {playerData.image && (
                         <img
                             src={playerData.image}
@@ -222,37 +258,7 @@ const DownloadImage = () => {
                         >
                             {playerData.name || "Player Name"}
                         </h1>
-                        <div className={`grid grid-cols-2 text-sm font-bold w-[70%] mx-auto  scale-90 `} style={{ color: colors.textColor }}>
-                            {/* Score */}
-                            <div className="flex p-0.5 justify-between mx-auto w-full  z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
-                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>Score:</p>
-                                <p>{playerData.score || "0"}</p>
-                            </div>
-
-                            {/* Balls Faced */}
-                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
-                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>Balls Faced:</p>
-                                <p>{playerData.ballsFaced || "0"}</p>
-                            </div>
-
-                            {/* Fours */}
-                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
-                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>4s:</p>
-                                <p>{playerData.fours || "0"}</p>
-                            </div>
-
-                            {/* Sixes */}
-                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
-                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>6s:</p>
-                                <p>{playerData.sixes || "0"}</p>
-                            </div>
-
-                            {/* Strike Rate */}
-                            <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r" style={{ borderColor: colors.borderColor }}>
-                                <p className="overflow-hidden" style={{ color: colors.labelColor }}>SR:</p>
-                                <p>{playerData.strikeRate || "0"}</p>
-                            </div>
-                        </div>
+                        {renderComponent()}
                     </div>
                 </div>
                 <button
@@ -267,3 +273,86 @@ const DownloadImage = () => {
 };
 
 export default DownloadImage;
+
+
+
+
+function Batsmancomponent({ colors, playerData }) {
+    return (
+        <>
+
+            <div className={`grid grid-cols-2 text-sm font-bold w-[70%] mx-auto  scale-90 `} style={{ color: colors.textColor }}>
+                {/* Score */}
+                <div className="flex p-0.5 justify-between mx-auto w-full  z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Score:</p>
+                    <p>{playerData.score || "0"}</p>
+                </div>
+
+                {/* Balls Faced */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Balls Faced:</p>
+                    <p>{playerData.ballsFaced || "0"}</p>
+                </div>
+
+                {/* Fours */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>4s:</p>
+                    <p>{playerData.fours || "0"}</p>
+                </div>
+
+                {/* Sixes */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>6s:</p>
+                    <p>{playerData.sixes || "0"}</p>
+                </div>
+
+                {/* Strike Rate */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r" style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>SR:</p>
+                    <p>{playerData.strikeRate || "0"}</p>
+                </div>
+            </div>
+        </>
+    )
+}
+
+
+function BowlerComponent({ colors, bowlerData }) {
+    // Function to calculate strike rate (balls per wicket)
+    const calculateStrikeRate = (balls, wickets) => {
+        return wickets > 0 ? (balls / wickets).toFixed(2) : "N/A";
+    };
+
+    // Convert overs to balls (1 over = 6 balls)
+    const totalBalls = Math.floor(bowlerData.overs) * 6 + (bowlerData.overs % 1) * 10;
+
+    return (
+        <>
+            <div className={`grid grid-cols-2 text-sm font-bold w-[70%] mx-auto scale-95 mb-3`} style={{ color: colors.textColor }}>
+                {/* Overs */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Overs:</p>
+                    <p>{bowlerData.overs || "0"}</p>
+                </div>
+
+                {/* Wickets */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-b" style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Wickets:</p>
+                    <p>{bowlerData.wickets || "0"}</p>
+                </div>
+
+                {/* Runs Conceded */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 border-r " style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Runs:</p>
+                    <p>{bowlerData.runs || "0"}</p>
+                </div>
+
+                {/* Strike Rate */}
+                <div className="flex p-0.5 justify-between mx-auto w-full z-10 " style={{ borderColor: colors.borderColor }}>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Strike Rate:</p>
+                    <p>{calculateStrikeRate(totalBalls, bowlerData.wickets)}</p>
+                </div>
+            </div>
+        </>
+    );
+}
