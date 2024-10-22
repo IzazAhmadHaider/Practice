@@ -40,6 +40,9 @@ function Home() {
       <Link to="/luthfullah" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
         Luthfullah
       </Link>
+      <Link to="/imagecreator" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+      imagecreator
+      </Link>
     </div>
   );
 }

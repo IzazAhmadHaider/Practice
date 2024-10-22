@@ -22,6 +22,7 @@ function Video() {
     return (
       <div className="h-screen flex items-center justify-center">
         <div className="w-full max-w-2xl">
+          <h1 className="text-4xl">Lutfullah Video</h1>
           <video controls className="w-full">
             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
             Your browser does not support the video tag.

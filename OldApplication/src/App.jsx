@@ -12,6 +12,7 @@ import Curve from './components/Curve';
 import Dropdown from './components/Dropdown';
 import Complexobj from './components/ComplexObj';
 import Luthfullah from './components/Luthfullah';
+import DownloadImage from './components/ImageDownloader';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/dropdown" element={<Dropdown />} />
         <Route path="/cobj" element={<Complexobj />} />
         <Route path="/luthfullah" element={<Luthfullah />} />
+        <Route path="/imagecreator" element={<DownloadImage />} />
       </Routes>
     </Router>
     </>
