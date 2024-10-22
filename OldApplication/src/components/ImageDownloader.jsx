@@ -349,10 +349,7 @@ function Batsmancomponent({ colors, playerData }) {
 
 
 function BowlerComponent({ colors, bowlerData }) {
-    // Function to calculate strike rate (balls per wicket)
-    const calculateStrikeRate = (balls, wickets) => {
-        return wickets > 0 ? (balls / wickets).toFixed(2) : "N/A";
-    };
+
 
     // Convert overs to balls (1 over = 6 balls)
     const totalBalls = Math.floor(bowlerData.overs) * 6 + (bowlerData.overs % 1) * 10;
@@ -380,37 +377,32 @@ function BowlerComponent({ colors, bowlerData }) {
 
                 {/* Strike Rate */}
                 <div className="flex p-0.5 justify-between mx-auto w-full z-10 " style={{ borderColor: colors.borderColor }}>
-                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Strike Rate:</p>
-                    <p>{calculateStrikeRate(totalBalls, bowlerData.wickets)}</p>
+                    <p className="overflow-hidden" style={{ color: colors.labelColor }}>Econ:</p>
+                    <p>{Math.ceil((bowlerData.runs / bowlerData.overs) * 10000) / 10000}</p>
+
                 </div>
             </div>
         </>
     );
 }
 function AllrounderComponent({ colors, AllrounderData, playerData }) {
-    const calculateStrikeRate = (balls, wickets) => {
-        return wickets > 0 ? (balls / wickets).toFixed(2) : "N/A";
-    };
-
-    // Convert overs to balls (1 over = 6 balls)
-    const totalBalls = Math.floor(AllrounderData.overs) * 6 + (AllrounderData.overs % 1) * 10;
-
     return (
         <>
-            <div className=" flex justify-between w-full my-1">
+            <div className="flex justify-between w-[80%] mx-auto my-1">
                 <h1
-                    className="text-xs mx-auto w-fit z-10 bg-[#360607] leading-tight tracking-[0.2em] uppercase text-[8px] font-bold px-4 py-1 rounded-xl"
+                    className="text-[10px] w-fit z-10 bg-[#360607] leading-tight tracking-[0.1em] uppercase font-bold px-2 py-0.5 rounded-lg"
                     style={{ color: colors.textColor }}
                 >
                     Bowling Stats
                 </h1>
                 <h1
-                    className="text-xs mx-auto w-fit z-10 bg-[#360607] leading-tight tracking-[0.2em] uppercase text-[8px] font-bold px-4 py-1 rounded-xl"
+                    className="text-[10px] w-fit z-10 bg-[#360607] leading-tight tracking-[0.1em] uppercase font-bold px-2 py-0.5 rounded-lg"
                     style={{ color: colors.textColor }}
                 >
                     Batting Stats
                 </h1>
             </div>
+
             <div className="flex">
                 <div className={`grid grid-cols-2 text-xs font-semibold w-[60%] mx-auto scale-90 mb-2`} style={{ color: colors.textColor }}>
                     <div className="flex p-0.25 justify-between mx-auto w-full z-10 border-r border-b" style={{ borderColor: colors.borderColor }}>
@@ -433,7 +425,8 @@ function AllrounderComponent({ colors, AllrounderData, playerData }) {
                     {/* Strike Rate */}
                     <div className="flex p-0.25 justify-between mx-auto w-full z-10" style={{ borderColor: colors.borderColor }}>
                         <p className="overflow-hidden" style={{ color: colors.labelColor }}>Econ:</p>
-                        <p>{AllrounderData.runs/AllrounderData.overs}</p>
+                        <p>{Math.ceil((AllrounderData.runs / AllrounderData.overs) * 10000) / 10000}</p>
+
                     </div>
                 </div>
 
@@ -467,7 +460,7 @@ function AllrounderComponent({ colors, AllrounderData, playerData }) {
                         <p>{playerData.strikeRate || "0"}</p>
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </>
     );
