@@ -49,7 +49,8 @@ const TeamCard = () => {
   };
 
   return (
-    <div className="p-4 font-SairaCondensed flex flex-col items-center space-y-4">
+    <div className="p-4 font-SairaCondensed flex w-full space-y-4">
+      <div className="flex max-lg:flex-col-reverse w-full space-x-5 ">
       <div className="flex flex-col w-full max-w-md space-y-4">
         <input
           type="text"
@@ -104,7 +105,7 @@ const TeamCard = () => {
               value={liBgColor}
               onChange={(e) => setLiBgColor(e.target.value)}
               className="ml-2"
-            />
+              />
           </label>
           <label>
             Text Color:
@@ -113,7 +114,7 @@ const TeamCard = () => {
               value={textColor}
               onChange={(e) => setTextColor(e.target.value)}
               className="ml-2"
-            />
+              />
           </label>
           <label>
             List Background Color: {/* New input for <ul> background color */}
@@ -122,11 +123,13 @@ const TeamCard = () => {
               value={ulBgColor}
               onChange={(e) => setUlBgColor(e.target.value)}
               className="ml-2"
-            />
+              />
           </label>
         </div>
+              </div>
+              <div>
 
-        <div ref={divRef} className={`p-4 relative rounded-lg shadow-lg w-96 flex flex-row-reverse`} style={{ backgroundColor: mainBgColor, color: textColor }}>
+        <div ref={divRef} className={`p-4 relative rounded-lg shadow-lg w-96 flex  flex-row-reverse`} style={{ backgroundColor: mainBgColor, color: textColor }}>
           <div className="absolute top-2 left-1/2 w-full transform -translate-x-1/2 z-0 flex space-x-1">
             <p className={`text-center flex flex-col w-full leading-tight uppercase text-[10px] font-bold`}>
               <span className="tracking-[1em] font-extrabold">Tufail MEMORIAL</span>
@@ -169,6 +172,7 @@ const TeamCard = () => {
         >
           Download Card
         </button>
+        </div>
       </div>
     </div>
   );
