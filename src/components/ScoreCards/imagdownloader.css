@@ -1,0 +1,11 @@
+.strifs {
+  opacity: 1;
+  background-image: linear-gradient(
+    to right,
+    #ecdd08,
+    #ecdd08 5px,
+    #0000004a 1px,
+    #000000
+  );
+  background-size: 10px 100%;
+}
