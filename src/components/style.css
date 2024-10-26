@@ -1,0 +1,39 @@
+.category-menu {
+    display: flex;
+  }
+  
+  .category {
+    margin-right: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .subcategory-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+  }
+  
+  .subcategory {
+    padding: 5px 0;
+  }
+  
+  .category:hover .subcategory-list {
+    display: block;
+  }
+  
+  .category:hover .subcategory {
+    display: block;
+  }
+  
+  .subcategory-list {
+    display: none;
+  }
+  

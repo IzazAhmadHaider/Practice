@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.range-slider::-webkit-slider-thumb {
+  width: 35px; 
+  height: 25px; 
+  background-color: #903FFF; 
+  border-radius: 40%; 
+  border: none; 
+  -webkit-appearance: none; 
+  appearance: none;
+}
+
+
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-regular-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-regular-webfont.woff2") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* src/fonts.css */
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-extralight-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-extralight-webfont.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+/* src/fonts.css */
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-black-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-black-webfont.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-bold-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-extrabold-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-extrabold-webfont.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-light-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-medium-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-semibold-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-semibold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Condensed";
+  src: url("/fonts/sairacondensed-thin-webfont.woff2") format("woff2"),
+    url("/fonts/sairacondensed-thin-webfont.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+/* src/fonts.css */
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-black-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-black-webfont.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-bold-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-extrabold-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-extrabold-webfont.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* src/fonts.css */
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-extralight-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-extralight-webfont.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-light-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-medium-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-semibold-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-semibold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-thin-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-thin-webfont.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Saira Semi Condensed";
+  src: url("/fonts/sairasemicondensed-regular-webfont.woff2") format("woff2"),
+    url("/fonts/sairasemicondensed-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.range-slider::-webkit-slider-thumb {
+  /* position: absolute; */
+  width: 22px;
+  height: 28px;
+  background-color: #903fff;
+  border-bottom-right-radius: 90%;
+  border-top-right-radius: 90%;
+  box-shadow: -100vw 0 0 99vw #903fff, inset 0 0 0 10px #903fff;
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* margin-top: 8px; */
+}
+
+.range-slider::-moz-range-thumb {
+  width: 22px;
+  height: 28px;
+  background-color: #903fff;
+  border-bottom-right-radius: 90%;
+  border-top-right-radius: 90%;
+  box-shadow: -100vw 0 0 99vw #903fff, inset 0 0 0 10px #903fff;
+  border: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.6s ease-out forwards;
+}
