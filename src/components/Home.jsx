@@ -43,6 +43,12 @@ function Home() {
       <Link to="/imagecreator" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
       imagecreator
       </Link>
+      <Link to="/cardsanimator" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+      Cards Animator
+      </Link>
+      <Link to="/StickyMobile" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+      Sticky Mobile
+      </Link>
     </div>
   );
 }

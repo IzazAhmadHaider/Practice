@@ -13,6 +13,8 @@ import Dropdown from './components/Dropdown';
 import Complexobj from './components/ComplexObj';
 import Luthfullah from './components/Luthfullah';
 import DownloadImage from './components/ImageDownloader';
+import CardsAnimation from './components/CardsAnimation';
+import StickyMobile from './components/StickyMobile';
 
 const App = () => {
   return (
@@ -33,6 +35,8 @@ const App = () => {
         <Route path="/cobj" element={<Complexobj />} />
         <Route path="/luthfullah" element={<Luthfullah />} />
         <Route path="/imagecreator" element={<DownloadImage />} />
+        <Route path="/cardsanimator" element={<CardsAnimation />} />
+        <Route path="/StickyMobile" element={<StickyMobile />} />
       </Routes>
     </Router>
     </>
